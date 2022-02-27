@@ -1,0 +1,33 @@
+type Vault @entity  {
+  id: ID!
+  pricePerFullShare: BigInt!
+  timestamp: BigInt!
+  address: Bytes!
+}
+
+type VaultHistory @entity {
+  id: ID!
+  address:String!
+  block: BigInt!
+  pricePerFullShare: BigInt!
+  timestamp: BigInt!
+}
+
+type UserVaultBalance @entity {
+  id: ID!
+  address:String!
+  amount: BigDecimal!
+  vault: Vault!
+}
+
+type TransferRequested @entity {
+  id: ID!
+  from: String!
+  to: String!
+  amount: String!
+  date: BigInt!
+  transactionId: BigInt!
+  signature: String!
+  step: BigInt!
+  block:BigInt!
+}

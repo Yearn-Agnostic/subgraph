@@ -1,0 +1,7 @@
+{
+  "network": "rinkeby",
+  "controllerAddress": "0xE1541F31764C499EB8858Dbaf529f85D9A3Ae2dc",
+  "bridgeAddress": "0x931F94C4484f20D3D745FE6d43e6D252e3EDF93C",
+  "startblock": 8600142,
+  "bridgeAbi": "EthBridge.json"
+}

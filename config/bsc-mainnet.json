@@ -1,0 +1,7 @@
+{
+  "network": "bsc",
+  "controllerAddress": "0xc0b938725dFbC4c630BC8F68FcFfbEaaD6672c48",
+  "bridgeAddress": "0x5aa45aA849a1B21498d3b70Dbc792EFbEEF9509b",
+  "startblock": 10116403,
+  "bridgeAbi": "BscBridge.json"
+}

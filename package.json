@@ -1,0 +1,18 @@
+{
+  "name": "subgraph",
+  "version": "0.1.0",
+  "scripts": {
+    "prepare:bsc-mainnet": "mustache config/bsc-mainnet.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:rinkeby": "mustache config/rinkeby.json subgraph.template.yaml > subgraph.yaml",
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy:rinkeby": "graph deploy mike-p-blaize/yagnosticrinkeby --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token 3f806efa5f7d441e8310a9c86b2b06dd",
+    "deploy:bsc-mainnet": "graph deploy mike-p-blaize/yagnostic-bsc --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token 3f806efa5f7d441e8310a9c86b2b06dd",
+    "deploy-local": "graph deploy example --ipfs http://localhost:5001 --node http://127.0.0.1:8020"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.20.0",
+    "@graphprotocol/graph-ts": "^0.20.0",
+    "mustache": "^4.2.0"
+  }
+}

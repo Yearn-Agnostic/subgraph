@@ -1,0 +1,71 @@
+specVersion: 0.0.2
+description: Subgraph for Yagnostic
+repository: https://github.com/Yearn-Agnostic/yagnostic-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Controller
+    network: {{network}}
+    source:
+      address: '{{controllerAddress}}'
+      abi: Controller
+      startBlock: {{startblock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Vault
+        - VaultHistory
+      abis:
+        - name: Controller
+          file: ./abis/Controller.json
+        - name: Vault
+          file: ./abis/yVault.json
+      eventHandlers:
+        - event: SetVault(indexed address,indexed address)
+          handler: handleSetVault
+      blockHandlers:
+        - handler: handleBlock
+      file: ./src/mappings/controller.ts
+  - kind: ethereum/contract
+    name: Bridge
+    network: {{network}}
+    source:
+      address: '{{bridgeAddress}}'
+      abi: Bridge
+      startBlock: {{startblock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - TransferRequested
+      abis:
+        - name: Bridge
+          file: ./abis/bridge/{{bridgeAbi}}
+      eventHandlers:
+        - event: TransferRequested(indexed address,address,uint256,uint256,indexed uint256,bytes,indexed uint8)
+          handler: handleTransferRequested
+      file: ./src/mappings/bridge/bridge.ts
+templates:
+  - kind: ethereum/contract
+    name: Vault
+    network: {{network}}
+    source:
+      abi: Vault
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/vault.ts
+      entities:
+        - UserVaultBalance
+        - VaultHistory
+      abis:
+        - name: Vault
+          file: ./abis/yVault.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
